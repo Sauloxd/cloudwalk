@@ -4,6 +4,7 @@ x-app: &app
     dockerfile: Dockerfile
     args:
       RUBY_VERSION: '3.2.2'
+      PG_MAJOR: '15'
   working_dir: /app
   tmpfs:
     - /tmp
@@ -19,12 +20,15 @@ x-backend: &backend
     - history:/usr/local/hist
     - ./.bashrc:/root/.bashrc:ro
   environment: &backend_environment
-    <<: *env
+    REDIS_URL: redis://redis:6379/
     BOOTSNAP_CACHE_DIR: /usr/local/bundle/_bootsnap
     XDG_DATA_HOME: /app/tmp/caches
     HISTFILE: /usr/local/hist/.bash_history
     IRB_HISTFILE: /usr/local/hist/.irb_history
     EDITOR: vi
+  depends_on: &backend_depends_on
+    redis:
+      condition: service_healthy
 
 services:
   app:
@@ -32,6 +36,18 @@ services:
     command: sleep infinity
     privileged: true
 
+  redis:
+    image: redis:6.2-alpine
+    volumes:
+      - redis:/data
+    ports:
+      - 6379
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
+  
   # Starts solargraph server in specific port.
   # Configure your solargraph in vscode to use same port (see .vscode/settings.json)
   # Since we are using docker-compose, this address is actually: solargraph:7658 instead of localhost:7658
@@ -44,3 +60,6 @@ services:
 volumes:
   bundle:
   history:
+  rails_cache:
+  postgres:
+  redis:
