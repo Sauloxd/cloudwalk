@@ -1,0 +1,46 @@
+x-app: &app
+  build:
+    context: .
+    dockerfile: Dockerfile
+    args:
+      RUBY_VERSION: '3.2.2'
+  working_dir: /app
+  tmpfs:
+    - /tmp
+    - /app/tmp/pids
+
+x-backend: &backend
+  <<: *app
+  stdin_open: true
+  tty: true
+  volumes:
+    - ..:/app:cached
+    - bundle:/usr/local/bundle
+    - history:/usr/local/hist
+    - ./.bashrc:/root/.bashrc:ro
+  environment: &backend_environment
+    <<: *env
+    BOOTSNAP_CACHE_DIR: /usr/local/bundle/_bootsnap
+    XDG_DATA_HOME: /app/tmp/caches
+    HISTFILE: /usr/local/hist/.bash_history
+    IRB_HISTFILE: /usr/local/hist/.irb_history
+    EDITOR: vi
+
+services:
+  app:
+    <<: *backend
+    command: sleep infinity
+    privileged: true
+
+  # Starts solargraph server in specific port.
+  # Configure your solargraph in vscode to use same port (see .vscode/settings.json)
+  # Since we are using docker-compose, this address is actually: solargraph:7658 instead of localhost:7658
+  solargraph:
+    <<: *backend
+    command: bundle exec solargraph socket --host=0.0.0.0 --port=7658
+    ports:
+      - '7658:7658'
+
+volumes:
+  bundle:
+  history:

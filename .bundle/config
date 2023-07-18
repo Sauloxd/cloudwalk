@@ -1,2 +1,3 @@
 ---
 BUNDLE_JOBS: "24"
+BUNDLE_BUILD__NIO4R: "--with-cflags=-Wno-error=implicit-function-declaration"

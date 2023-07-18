@@ -22,3 +22,11 @@ end
 group :cli, :development, :test do
   gem "hanami-rspec"
 end
+
+group :development do
+  gem "guard-puma", "~> 0.8"
+end
+
+group :test do
+  gem "rack-test"
+end
