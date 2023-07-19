@@ -21,7 +21,7 @@ module App
           if transaction.save
             response.body = {
               transaction_id: transaction.transaction_id,
-              recommendation: transaction.recomendation,
+              recommendation: transaction.recommendation,
               reasons: transaction.reject_reasons
             }.to_json
           end

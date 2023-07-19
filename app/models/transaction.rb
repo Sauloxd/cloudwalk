@@ -13,7 +13,7 @@ module App
                   :transaction_amount,
                   :device_id,
                   :has_cbk,
-                  :recomendation,
+                  :recommendation,
                   :reject_reasons
       
       def initialize(
@@ -49,7 +49,8 @@ module App
 
       def valid?
         @reject_reasons = ::App::Policies::Frauds::Check::Policy.call(self)
-        @recomendation = reject_reasons.empty? ? :approve : :deny
+        @recommendation = @reject_reasons.empty? ? :approve : :deny
+        @reject_reasons.empty?
       end
 
       def serialized_json
@@ -63,7 +64,7 @@ module App
           device_id: device_id,
           has_cbk: has_cbk,
           reject_reasons: reject_reasons,
-          recomendation: recomendation
+          recommendation: recommendation
         }.to_json
       end
     end
