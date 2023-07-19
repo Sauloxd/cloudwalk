@@ -30,6 +30,6 @@ module AllowAmountOnPeriodConfiguration
   private
 
   def format_error(rule, amount, timestamp)
-    "Reject due to transaction amount #{amount} above threshold #{rule[:max_amount]} for this time period - from #{rule[:from]}, to #{rule[:to]}, timestamp: #{timestamp}"
+    "Invalid due to transaction amount #{amount} above threshold #{rule[:max_amount]} for this time period - from #{rule[:from]}, to #{rule[:to]}, timestamp: #{timestamp}"
   end
 end

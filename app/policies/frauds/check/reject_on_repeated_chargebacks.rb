@@ -4,7 +4,7 @@ module App
   module Policies
     module Frauds
       module Check 
-        # Objective from question: Reject transaction if a user had a chargeback before
+        # Reject transaction if a user had a chargeback before
         # (note that this information does not comes on the payload. The chargeback data is received days after the transaction was approved)
 
         class RejectOnRepeatedChargebacks

@@ -3,9 +3,7 @@
 module App
   module Models
     class Transaction
-      def self.chargeback_count_for(user_id:)
-        $REDIS.get("chargebacks:#{user_id}")
-      end
+      extend ::App::Scopes::Transaction
 
       attr_reader :transaction_id,
                   :merchant_id,
@@ -41,6 +39,7 @@ module App
       def save
         if valid?
           $REDIS.set(transaction_id, serialized_json)
+          $REDIS.set("last_user_transaction_at:#{user_id}", Time.now)
         else
           false
         end

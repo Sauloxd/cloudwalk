@@ -5,6 +5,8 @@ module App
   module Policies
     module Frauds
       module Check 
+        # Reject transactions above a certain amount in a given period;
+
         class RejectOnGivenPeriodValue
           extend AllowAmountOnPeriodConfiguration
 
