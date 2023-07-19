@@ -5,7 +5,7 @@ module App
     module Frauds
       class Index < ::App::Action
         def handle(*, response)
-          response.body = self.class.name
+          response.body = "Hello world! :)"
         end
       end
     end

@@ -4,7 +4,7 @@ module App
   module Policies
     module Frauds
       module Check 
-        class Policy < ::App::Policies::Policy
+        class Policy
           def self.call(*)
             [
               RejectOnGivenPeriodValue,
