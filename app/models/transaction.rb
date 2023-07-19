@@ -5,7 +5,7 @@ module App
     class Transaction
       extend ::App::Scopes::Transaction
 
-      attr_reader :transaction_id,
+      attr_accessor :transaction_id,
                   :merchant_id,
                   :user_id,
                   :card_number,
