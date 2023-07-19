@@ -2,7 +2,7 @@
 
 module App
   class Routes < Hanami::Routes
-    root to: "frauds.check"
+    root to: "frauds.index"
     post "/frauds/check", to: "frauds.check"
   end
 end

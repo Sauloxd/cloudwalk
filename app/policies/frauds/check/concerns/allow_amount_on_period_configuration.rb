@@ -7,6 +7,7 @@ module AllowAmountOnPeriodConfiguration
   end
 
   def validate_with_error(amount:, timestamp:)
+    # All timestamps are set to UTC, that way we avoid comparing different timezones by mistake
     time = Time.parse(timestamp)
     invalid_rule = @@config.find do |rule|
       from = Time.parse(rule[:from], time)
