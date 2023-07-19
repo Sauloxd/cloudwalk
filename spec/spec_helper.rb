@@ -8,3 +8,5 @@ require "hanami/prepare"
 
 require_relative "support/rspec"
 require_relative "support/requests"
+require 'redis'
+$REDIS = Redis.new(host: 'redis', port: 6379)

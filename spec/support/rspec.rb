@@ -24,4 +24,8 @@ RSpec.configure do |config|
 
   config.order = :random
   Kernel.srand config.seed
+
+  config.before do
+    $REDIS.flushdb 
+  end
 end
