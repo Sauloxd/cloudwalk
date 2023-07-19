@@ -10,7 +10,7 @@ module App
         class RejectOnRepeatedChargebacks
           def self.call(transaction)
             user_id = transaction.user_id
-            chargebacks = $REDIS.get("chargebacks:#{user_id}")
+            chargebacks = ::App::Models::Transaction.chargeback_count_for(user_id: user_id)
 
             unless chargebacks.nil?
               "Invalid due to repeated chargebacks. User #{user_id} already has #{chargebacks} chargebacks"
