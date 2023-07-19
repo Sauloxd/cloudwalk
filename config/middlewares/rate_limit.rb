@@ -100,6 +100,4 @@ module Middlewares
       @redis.unwatch
     end
   end
-
-
 end
