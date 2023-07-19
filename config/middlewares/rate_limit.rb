@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require "pry"
-require "pry-remote"
 
 module Middlewares
   # Rate limit **every** request on this app based on a single token counter

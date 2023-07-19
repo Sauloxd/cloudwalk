@@ -8,9 +8,10 @@ module App
         # (note that this information does not comes on the payload. The chargeback data is received days after the transaction was approved)
 
         class RejectOnRepeatedChargebacks
-          def self.call(request)
-            user_id = request.params[:user_id]
+          def self.call(transaction)
+            user_id = transaction.user_id
             chargebacks = $REDIS.get("chargebacks:#{user_id}")
+
             unless chargebacks.nil?
               "Invalid due to repeated chargebacks. User #{user_id} already has #{chargebacks} chargebacks"
             end

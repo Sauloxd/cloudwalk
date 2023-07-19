@@ -8,7 +8,7 @@ module App
           def self.call(*)
             [
               RejectOnGivenPeriodValue,
-              RejectOnPredefinedHeuristics,
+              RejectOnRepeatedTransactions,
               RejectOnRepeatedChargebacks
             ].map { |predicate| predicate.call(*) }.compact
           end
