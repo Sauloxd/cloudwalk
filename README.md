@@ -14,6 +14,9 @@ This web application consists of a single endpoint: `/frauds/check` which receiv
 All dependencies are inside the dockerfile inside .devcontainer
 Use VSCode, press  F1 > Dev Container: Rebuild Container and VSCode will start the container running the project and Redis.
 Open integrated terminal in Vscode, run `bundle install` and start hanami by running: `hanami server` 
+If it does not work, run `docker compose up` in `.devcontainer/` folder.
+
+This application requires Ruby 3.2.2 and Redis running on port 6379
 
 ### Architecture
 

@@ -4,7 +4,6 @@ x-app: &app
     dockerfile: Dockerfile
     args:
       RUBY_VERSION: '3.2.2'
-      PG_MAJOR: '15'
   working_dir: /app
   tmpfs:
     - /tmp
@@ -61,5 +60,4 @@ volumes:
   bundle:
   history:
   rails_cache:
-  postgres:
   redis:
