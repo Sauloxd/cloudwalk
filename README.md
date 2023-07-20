@@ -58,8 +58,11 @@ Just in case I implemented a very simple/naive ratelimit that probably won't wor
 It uses the simple [bucket token algorithm](https://jgam.medium.com/rate-limiter-token-bucket-algorithm-efd86758c8ee).
 I tried to implement a transaction in Redis by leveraging the LUA scripts and the watch/unwatch features.
 The idea is that, to avoid reading and updating in separated commands, I perform both at the same time, thus avoiding race conditions.
+Check the ratelimit implementation [here](config/middlewares/rate_limit.rb)
+
+Test by calling any endpoint repeatedly. If you try too much, the server will return `429 TOO MANY REQUESTS` response.
 
 #### Why the main database is Redis?
 
-Honestly it was due the fact the rate limit was using one already. Probably on a really large dataset, I would use a noSQL, since a fraud system requires more speed over super consistency, like an actual banking system.
-Since the dataset provided is 260kb only, I could have skipped using Redis and used just an in-memory object, but for the sake of the challenge I decided to use Redis, as there are advantages on using Redis for perfomance.
+Honestly it was due the fact the rate limit was using one already. Probably on a really large dataset, I would use a noSQL, since a fraud system requires more speed over super consistency, like an actual banking system which would benefit more from a SQL database.
+Since the dataset provided is 260kb only, I could have even skipped using Redis and used just an in-memory object, but for the sake of the challenge I decided to use Redis, as there are advantages on using Redis for perfomance, even when used in production as is.
