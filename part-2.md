@@ -66,12 +66,12 @@ After 22h til 03h we can be more restrictive and use the legit average as max am
 ### Some stores have way more frauds than others
 
 Since we are working with a small dataset of 3.2k records, we can still see that some `merchants` has way more frauds than others, almost 30% of all frauds are concentrated in 12 merchants (out of 1756, less than 1%).
-This suggests that we need to keep track of suspicious merchants and with a track record of frauds, being more rigorous in the approval, and more lenient with newer merchants that has no history.
+This suggests that we need to keep track of suspicious merchants with a track record of frauds being more rigorous in its approval and more lenient with newer merchants that has no history.
 
 Although it's hard to really come up with a conclusion, because it just may be that the frauds are commited against big merchants, like amazon.
 
 ## In addition to the spreadsheet data, what other data would you look at to try to find patterns of possible frauds?
 
 If possible, it would be better to cross the user information with previous records of purchases.
-For example, for a given person that had his last purchase in a given region, it's highly unlikely that that person will by something that will be delivered abroad (although we can't discard the possibility that this purchase is a gift for someone abroad or something).
-By crossing data of that person purchase history, we can preemptively block a purchase that has no characteristics of the usual purchases. 
+For example, for a given person that had his last purchase in a given region, it's highly unlikely that that person will buy something that will be delivered abroad (although we can't discard the possibility that this purchase is a gift for someone abroad or something).
+By crossing data of that person purchase history, we can preemptively block a purchase that has no characteristics of a usual purchases. 
