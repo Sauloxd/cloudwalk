@@ -3,7 +3,7 @@
 ## Explain the money flow and the information flow in the acquirer market and the role of the main players.
 
 A simple diagram is:
-
+``` 
   ┌──────────────────┐
   │     Merchant     │
   └──────┬───────────┘
@@ -27,6 +27,7 @@ A simple diagram is:
   ┌──────────┴───────┐
   │   Issuing Bank   │
   └──────────────────┘
+```
 
 A. The customer decides to pay for the products/service and choses a payment method, fills all the information, and confirms the purchase.
 
