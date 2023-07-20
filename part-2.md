@@ -59,9 +59,9 @@ This reveals the following:
 which reveals that, proportionally, after 19h till the start of 4h, we have a spike in frauds in this period.
 Also, the averages of a fraud is always above 1000, which can be used as a base for a cap value for this period.
 
-It's rather unusual for big purchases after midnight, but we not so much from 19h to 22h.
-We can have a more laxed amount for 19h ~ 22h, using the fraud average for this interval, allowing more legit purchases to have the chance to be fulfilled (1366.69). 
-After 22h til 03h we can be more restrict and use the legit average as max amount for this interval (570.43).
+It's rather unusual for big purchases after midnight, but not so much from 19h to 22h.
+We can have a more lax amount for 19h ~ 22h, using the fraud average for this interval, allowing more legit purchases to have the chance to be fulfilled, but limiting for high values (1366.69). 
+After 22h til 03h we can be more restrictive and use the legit average as max amount for this interval, in an attempt to still allow legit purchases (570.43).
 
 ### Some stores have way more frauds than others
 
