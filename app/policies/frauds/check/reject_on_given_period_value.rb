@@ -10,10 +10,8 @@ module App
         class RejectOnGivenPeriodValue
           extend AllowAmountOnPeriodConfiguration
 
-          allow from: '22:00', to: '06:00', max_amount: 2000
-          allow from: '06:00', to: '09:00', max_amount: 10000
-          allow from: '09:00', to: '18:00', max_amount: 50000
-          allow from: '18:00', to: '22:00', max_amount: 10000
+          allow from: '22:00', to: '03:00', max_amount: 570.43
+          allow from: '19:00', to: '22:00', max_amount: 1366.69
 
           def self.call(transaction)
             amount = transaction.transaction_amount

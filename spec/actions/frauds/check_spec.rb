@@ -63,7 +63,7 @@ RSpec.describe App::Actions::Frauds::Check do
       expect(JSON.parse(response.body.first)).to match({
         "transaction_id" => '123456',
         "recommendation" => 'deny',
-        "reasons" => ["Invalid due to transaction amount 2001 above threshold 2000 for this time period - from 22:00, to 06:00, timestamp: 2019-11-21T23:00:00"]
+        "reasons" => ["Invalid due to transaction amount 2001 above threshold 570.43 for this time period - from 22:00, to 03:00, timestamp: 2019-11-21T23:00:00"]
       })
     end
   end

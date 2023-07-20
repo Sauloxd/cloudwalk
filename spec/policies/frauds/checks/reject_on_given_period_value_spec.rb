@@ -23,47 +23,35 @@ RSpec.describe App::Policies::Frauds::Check::RejectOnGivenPeriodValue do
       )
     end
 
-    context '22:00 ~ 06:00' do
+    context '22:00 ~ 03:00' do
       let(:hour) { '23:00:00' }
       
-      it 'allows if bellow max_amount of 2000' do
+      it 'allows if bellow max_amount of 570.43' do
+        expect(subject.call(300)).to be_nil
+      end
+      it 'denies if above max_amount of 570.43' do
+        expect(subject.call(2001)).to include("Invalid due to transaction amount 2001 above threshold 570.43 for this time period - from 22:00, to 03:00")
+      end
+    end
+
+    context '03:00 ~ 19:00' do
+      let(:hour) { '11:00:00' }
+
+      it 'allows every amount' do
+        expect(subject.call(5000)).to be_nil
+        expect(subject.call(0)).to be_nil
+        expect(subject.call(100000)).to be_nil
+      end
+    end
+
+    context '19:00 ~ 22:00' do
+      let(:hour) { '21:00:00' }
+
+      it 'allows if bellow max_amount of 1366.69' do
         expect(subject.call(1000)).to be_nil
       end
-      it 'denies if above max_amount of 2000' do
-        expect(subject.call(2001)).to include("Invalid due to transaction amount 2001 above threshold 2000 for this time period - from 22:00, to 06:00")
-      end
-    end
-
-    context '06:00 ~ 09:00' do
-      let(:hour) { '07:00:00' }
-
-      it 'allows if bellow max_amount of 10000' do
-        expect(subject.call(5000)).to be_nil
-      end
-      it 'denies if above max_amount of 10000' do
-        expect(subject.call(100001)).to include("Invalid due to transaction amount 100001 above threshold 10000 for this time period - from 06:00, to 09:00")
-      end
-    end
-
-    context '09:00 ~ 18:00' do
-      let(:hour) { '15:00:00' }
-
-      it 'allows if bellow max_amount of 50000' do
-        expect(subject.call(49000)).to be_nil
-      end
-      it 'denies if above max_amount of 50000' do
-        expect(subject.call(100001)).to include("Invalid due to transaction amount 100001 above threshold 50000 for this time period - from 09:00, to 18:00, timestamp: 15:00:00")
-      end
-    end
-
-    context '18:00 ~ 22:00' do
-      let(:hour) { '19:00:00' }
-
-      it 'allows if bellow max_amount of 10000' do
-        expect(subject.call(9000)).to be_nil
-      end
-      it 'denies if above max_amount of 10000' do
-        expect(subject.call(10001)).to include("Invalid due to transaction amount 10001 above threshold 10000 for this time period - from 18:00, to 22:00, timestamp: 19:00:00")
+      it 'denies if above max_amount of 1366.69' do
+        expect(subject.call(1370)).to include("Invalid due to transaction amount 1370 above threshold 1366.69 for this time period - from 19:00, to 22:00")
       end
     end
   end
